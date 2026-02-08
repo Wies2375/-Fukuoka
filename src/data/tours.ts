@@ -34,8 +34,8 @@ export const siteConfig = {
     { label: "聯絡我們", href: "#footer" },
   ],
   heroTitle: "Kyushu Autumn 2026",
-  heroTitleZh: "2026 九州秋之旅",
-  heroDescription: "秋遊九州六日：熊本入境直奔福岡博多、太宰府天滿宮、糸島包車、阿蘇火山與草千里、高千穗峽划船、熊本城與熊本熊。精選福岡・熊本・阿蘇・高千穗景點，感受九州秋色。",
+  heroTitleZh: "2026 九州秋之旅 — 秋色限定",
+  heroDescription: "深秋限定路線：六日漫遊九州，從福岡的屋台風情到阿蘇的金色草原與高千穗峽的靜謐瀑布，品味秋日色彩與在地風味。",
   footer: {
     tel: "02-2509-8567",
     fax: "02-2509-8577",
@@ -52,6 +52,7 @@ export const tours: Tour[] = [
     subtitle: "福岡・熊本・阿蘇・高千穗｜博多屋台・太宰府・草千里・高千穗峽划船・熊本城",
     price: "歡迎洽詢",
     image: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800",
+    // note: images can be replaced with /images/*.jpg in public/
     dateGroups: [
       { month: "Oct.", dates: [24, 25, 26, 27, 28, 29] },
     ],
