@@ -1,35 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+/* src/app/globals.css */
 :root {
-  --foreground: #2b1608;
-  --background: linear-gradient(180deg, #fff7ed 0%, #fffaf0 100%);
-  --primary: #9a3d00;
-  --accent: #b45309;
+  --bg: #FBF7F0;
+  --ink: #1E1A16;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
+html, body {
+  background: var(--bg);
+  color: var(--ink);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* 讓整體更像 Wix 那種「乾淨但溫暖」的印刷感 */
+::selection {
+  background: rgba(196, 106, 43, 0.25);
 }
-
-/* Autumn utility tweaks */
-@layer components {
-  .autumn-shadow {
-    box-shadow: 0 6px 18px rgba(154, 61, 0, 0.08);
-  }
-  .autumn-badge {
-    background: linear-gradient(90deg,#ffd8b5,#f59e0b);
-    color: #4b2508;
-  }
-}
-
-/* Warm filter for images to emphasize autumn tones */
-.autumn-image { filter: saturate(1.05) contrast(1.02) sepia(0.07); }

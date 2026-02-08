@@ -7,14 +7,14 @@ interface TourCardProps {
 
 export default function TourCard({ tour }: TourCardProps) {
   return (
-    <article className="group overflow-hidden rounded-xl border border-autumn-200 bg-white autumn-shadow transition hover:shadow-md">
+    <article className="group overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
       <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
         {/* 若圖片尚未放置，會顯示灰色底；請將圖片放到 public/images/ 對應檔名 */}
         <Image
           src={tour.image}
           alt={tour.title}
           fill
-          className="object-cover transition group-hover:scale-105 autumn-image"
+          className="object-cover transition group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           unoptimized
         />
@@ -28,7 +28,7 @@ export default function TourCard({ tour }: TourCardProps) {
         {tour.detailLink && (
           <a
             href={tour.detailLink}
-            className="inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-accent-light"
+            className="inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-white transition hover:bg-primary-light"
           >
             行程特色
           </a>
@@ -43,7 +43,7 @@ export default function TourCard({ tour }: TourCardProps) {
                 {group.dates.map((d) => (
                   <span
                     key={d}
-                    className="rounded px-2 py-0.5 text-sm text-gray-700 autumn-badge"
+                    className="rounded bg-gray-100 px-2 py-0.5 text-sm text-gray-700"
                   >
                     {d}
                   </span>
