@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>2026 九州秋之旅｜沉浸式行程</title>
+  <title>2026 九州秋之旅｜福岡熊本漫遊</title>
 
   <style>
     /* ==========================
@@ -15,7 +15,6 @@
       --accent: #d97706; /* 楓葉橘 */
       --secondary: #666666;
       --border: #eeeeee;
-      --overlay: rgba(0, 0, 0, 0.3);
       --font-serif: "Playfair Display", "Noto Serif TC", serif;
       --font-sans: "Inter", "PingFang TC", "Noto Sans TC", sans-serif;
     }
@@ -32,7 +31,6 @@
 
     /* Typography */
     h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; margin: 0; }
-    
     .container { width: min(1200px, 90%); margin-inline: auto; }
 
     /* Topbar */
@@ -47,30 +45,17 @@
     .nav { display: flex; justify-content: space-between; align-items: center; }
     .brand { font-family: var(--font-serif); font-size: 24px; letter-spacing: 1px; }
 
-    .tools { display: flex; gap: 15px; }
-    .btn {
-      padding: 8px 16px; border: 1px solid var(--text);
-      background: transparent; cursor: pointer; font-size: 13px;
-      transition: 0.3s;
-    }
-    .btn:hover { background: var(--text); color: #fff; }
-
     /* Hero Section */
     .hero {
       height: 100vh;
       position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-align: center;
-      overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      color: white; text-align: center; overflow: hidden;
     }
     .hero-img {
       position: absolute; inset: 0;
       background-size: cover; background-position: center;
-      z-index: -1;
-      transform: scale(1.05);
+      z-index: -1; transform: scale(1.05);
     }
     .hero::after {
       content: ""; position: absolute; inset: 0;
@@ -80,42 +65,69 @@
     .hero h1 { font-size: clamp(40px, 8vw, 80px); margin-bottom: 20px; }
     .hero p { font-size: 18px; letter-spacing: 4px; text-transform: uppercase; }
 
-    /* Itinerary Section */
+    /* Hero Nav Buttons */
+    .hero-nav {
+      display: flex; justify-content: center; gap: 15px;
+      margin-top: 30px; flex-wrap: wrap;
+    }
+    .day-btn {
+      width: 50px; height: 50px; border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.1); color: white;
+      text-decoration: none; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-size: 14px;
+      backdrop-filter: blur(5px); transition: 0.3s;
+    }
+    .day-btn:hover { background: white; color: var(--text); transform: translateY(-3px); }
+
+    /* Overview Section */
+    .overview-section {
+      padding: 100px 0 60px;
+      background-color: #fafafa;
+      border-bottom: 1px solid var(--border);
+    }
+    .overview-header { text-align: center; margin-bottom: 60px; }
+    .overview-kicker {
+      text-transform: uppercase; letter-spacing: 3px; font-size: 12px;
+      color: var(--accent); margin-bottom: 10px;
+    }
+    .overview-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+    }
+    .overview-link { text-decoration: none; color: inherit; display: block; }
+    .overview-item {
+      display: flex; align-items: center; gap: 20px;
+      padding: 25px; background: #fff; border: 1px solid var(--border);
+      transition: 0.3s; height: 100%;
+    }
+    .overview-item:hover { border-color: var(--accent); transform: translateY(-5px); }
+    .overview-num {
+      flex: 0 0 50px; height: 50px; border-radius: 50%;
+      border: 1px solid var(--border); display: flex;
+      align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-size: 20px;
+    }
+    .overview-item:nth-child(odd) .overview-num { background-color: #f2e9e9; color: #a68b8b; }
+    .overview-item:nth-child(even) .overview-num { background-color: #e9f2f2; color: #8ba6a6; }
+    .overview-content { font-size: 14px; color: var(--secondary); line-height: 1.6; }
+    .overview-title { font-weight: 700; color: var(--text); margin-bottom: 4px; }
+
+    /* Itinerary Details */
     .day-section { padding: 100px 0; border-bottom: 1px solid var(--border); }
-    .day-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: start;
-    }
-    
+    .day-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
     .day-info { position: sticky; top: 120px; }
-    .day-number { 
-        font-family: var(--font-serif); font-size: 120px; 
-        color: var(--border); line-height: 1; margin-bottom: -20px;
-    }
+    .day-number { font-family: var(--font-serif); font-size: 120px; color: var(--border); line-height: 1; margin-bottom: -20px; }
     .day-title { font-size: 32px; margin-bottom: 20px; border-bottom: 2px solid var(--accent); display: inline-block; padding-bottom: 10px;}
     .day-tags { display: flex; gap: 10px; margin-bottom: 30px; opacity: 0.6; font-size: 14px; }
     
     .timeline { display: flex; flex-direction: column; gap: 40px; }
-    .segment { position: relative; }
-    .seg-img {
-      width: 100%; height: 400px;
-      object-fit: cover;
-      margin-bottom: 20px;
-      filter: grayscale(20%);
-      transition: 0.5s;
-    }
+    .seg-img { width: 100%; height: 400px; object-fit: cover; margin-bottom: 20px; filter: grayscale(10%); transition: 0.5s; }
     .seg-img:hover { filter: grayscale(0%); }
     .seg-label { text-transform: uppercase; font-size: 12px; letter-spacing: 2px; color: var(--accent); font-weight: 700; }
     .seg-title { font-size: 20px; margin: 10px 0; font-weight: 600; }
     .seg-list { padding-left: 20px; color: var(--secondary); }
-    .seg-list li { margin-bottom: 8px; }
-
-    .stay-box {
-        margin-top: 40px; padding: 20px; border: 1px solid var(--border);
-        font-size: 14px; color: var(--secondary);
-    }
+    .stay-box { margin-top: 40px; padding: 20px; border: 1px solid var(--border); font-size: 14px; color: var(--secondary); }
 
     footer { padding: 60px 0; text-align: center; border-top: 1px solid var(--border); font-size: 13px; color: #999; }
 
@@ -136,8 +148,6 @@
     <div class="container">
       <nav class="nav">
         <div class="brand" id="brandTitle">KYUSHU AUTUMN</div>
-        <div class="tools">
-        </div>
       </nav>
     </div>
   </header>
@@ -145,14 +155,24 @@
   <section class="hero">
     <div class="hero-img" id="heroBg"></div>
     <div class="content">
-      <p id="heroDates">OCT 24 – OCT 29</p>
-      <h1 id="heroTitle">九州秋之旅</h1>
-      <div style="width: 50px; height: 2px; background: white; margin: 0 auto;"></div>
+      <p id="heroDates"></p>
+      <h1 id="heroTitle"></h1>
+      <div style="width: 50px; height: 2px; background: white; margin: 20px auto;"></div>
+      <div class="hero-nav" id="heroNav"></div>
     </div>
   </section>
 
-  <main class="container" id="dayList">
-    </main>
+  <section class="overview-section">
+    <div class="container">
+      <div class="overview-header">
+        <p class="overview-kicker">Quick Look</p>
+        <h2 class="overview-main-title">行程總覽</h2>
+      </div>
+      <div class="overview-grid" id="overviewGrid"></div>
+    </div>
+  </section>
+
+  <main class="container" id="dayList"></main>
 
   <footer>
     <div class="container">
@@ -169,138 +189,108 @@
       heroImage: "assets/images/hero.jpg",
       days: [
         {
-          day: "01", date: "10/24(六)", title: "抵達熊本，直奔福岡（自由活動）",
+          day: "01", date: "10/24(六)", title: "抵達熊本，直奔福岡",
           tags: ["FUKUOKA", "STARLUX", "FREETIME"],
           stay: "住宿：福岡市區飯店",
           segments: [
-            { label: "Morning", title: "抵達機場 & 移動", photo: "assets/images/day1_P1.jpg", items: ["07:30 桃園機場起飛：JX846","10:45 抵達熊本機場", "搭乘機場利木津巴士至熊本車站（40mins）","搭乘新幹線至福岡（博多）車站（40mins）"] },
-            { label: "Afternoon", title: "博多舊市區散策", photo: "assets/images/day1_P2.jpg", items: ["博多舊市區漫步","櫛田神社參拜","博多運河城動漫周邊巡禮"] },
-            { label: "Evening", title: "中洲屋台體驗", photo: "assets/images/day1_P3.jpg", items: ["體驗博多特色屋台文化"] }
+            { label: "Morning", title: "抵達機場 & 移動", photo: "assets/images/day1_P1.jpg", items: ["07:30 桃園機場起飛：JX846","10:45 抵達熊本機場", "搭乘新幹線至福岡（博多）車站"] },
+            { label: "Afternoon", title: "博多舊市區散策", photo: "assets/images/day1_P2.jpg", items: ["博多舊市區漫步","櫛田神社參拜","博多運河城巡禮"] },
+            { label: "Evening", title: "中洲屋台體驗", photo: "assets/images/day1_P3.jpg", items: ["體驗博多特色屋台文化", "超市採買回民宿"] }
           ]
         },
         {
-          day: "02", date: "10/25(日)", title: "太宰府與天神購物（自由活動）",
+          day: "02", date: "10/25(日)", title: "太宰府與天神購物",
           tags: ["DAZAIFU", "SHOPPING", "FUKUOKA"],
           stay: "住宿：福岡市區飯店",
           segments: [
             { label: "Morning", title: "太宰府天滿宮", photo: "assets/images/day2_P1.jpg", items: ["參拜學問之神", "品嚐現烤梅枝餅"] },
-            { label: "Afternoon", title: "天神時尚圈", photo: "assets/images/day2_P2.jpg", items: ["天神地下街購物", "百貨商圈"] },
-            { label: "Evening", title: "福岡城市夜景", photo: "assets/images/day2_P3.jpg", items: ["市區精緻晚餐", "研討會行程"] }
+            { label: "Afternoon", title: "天神時尚圈", photo: "assets/images/day2_P2.jpg", items: ["天神地下街購物", "百貨商圈逛到飽"] },
+            { label: "Evening", title: "福岡城市夜景", photo: "assets/images/day2_P3.jpg", items: ["市區精緻晚餐", "研討會行程重點"] }
           ]
         },
         {
-          day: "03", date: "10/26(一)", title: "系島海岸線（包車）",
+          day: "03", date: "10/26(一)", title: "系島海岸線秘境之旅",
           tags: ["ITOSHIMA", "OCEAN VIEW", "CAFE"],
           stay: "住宿：福岡市區飯店",
           segments: [
-            { label: "Morning", title: "系島海岸線", photo: "assets/images/day3_P1.jpg", items: ["包車前往白色鳥居", "櫻井二見浦"] },
-            { label: "Afternoon", title: "海景咖啡時光", photo: "assets/images/day3_P2.jpg", items: ["活魚茶屋ZAUO本店", "椰子樹鞦韆","系島雜貨小店"] },
-            { label: "Evening", title: "回程博多", photo: "assets/images/day3_P3.jpg", items: ["芥屋大門","白糸瀑布","回福岡自由用餐"] }
+            { label: "Morning", title: "系島地標巡禮", photo: "assets/images/day3_P1.jpg", items: ["櫻井二見浦白色鳥居", "芥屋大門"] },
+            { label: "Afternoon", title: "海景咖啡時光", photo: "assets/images/day3_P2.jpg", items: ["椰子樹鞦韆", "活魚茶屋ZAUO本店"] },
+            { label: "Evening", title: "自然與美食", photo: "assets/images/day3_P3.jpg", items: ["龍貓森林", "白糸瀑布流水麵"] }
           ]
-        },{
-  day: "04", date: "10/27(二)", title: "阿蘇奇景與進擊的巨人（包車）",
-  tags: ["ASO", "VOLCANO", "NATURE"],
-  stay: "住宿：阿蘇",
-  segments: [
-    { 
-      label: "Morning", 
-      title: "大分縣日田市 × 進擊的巨人", 
-      photo: "assets/images/day4_P1.jpg", 
-      items: [
-        "犬山觀賞進擊的巨人雕像",
-        "前往阿蘇地區沿途風景"
-      ] 
-    },
-    { 
-      label: "Afternoon", 
-      title: "阿蘇火山奇景", 
-      photo: "assets/images/day4_P2.jpg", 
-      items: [
-        "阿蘇中岳火山口（視噴發警戒狀況開放）",
-        "若管制則改參觀阿蘇火口博物館",
-        "草千里之濱金黃色草原"
-      ] 
-    },
-    { 
-      label: "Evening", 
-      title: "秘境神社巡禮", 
-      photo: "assets/images/day4_P3.jpg", 
-      items: [
-        "上色見熊野座神社",
-        "入住阿蘇溫泉飯店"
-      ] 
-    }
-  ]
-},
-{
-  day: "05", date: "10/28(三)", title: "高千穗峽探索與熊本市區",
-  tags: ["TAKACHIHO", "WATERFALL", "KUMAMOTO"],
-  stay: "住宿：熊本市區飯店",
-  segments: [
-    { 
-      label: "Morning", 
-      title: "高千穗峽划船體驗", 
-      photo: "assets/images/day5_P1.jpg", 
-      items: [
-        "高千穗峽划船",
-        "近距離欣賞真名井瀑布",
-        "峽谷步道散策"
-      ] 
-    },
-    { 
-      label: "Afternoon", 
-      title: "阿蘇親子樂園", 
-      photo: "assets/images/day5_P2.jpg", 
-      items: [
-        "阿蘇農場樂園",
-        "自然體驗與休閒活動"
-      ] 
-    },
-    { 
-      label: "Evening", 
-      title: "熊本市區散策", 
-      photo: "assets/images/day5_P3.jpg", 
-      items: [
-        "熊本城參觀",
-        "熊本熊廣場拍照",
-        "熊本市區自由晚餐"
-      ] 
-    }
-  ]
-},
-{
-  day: "06", date: "10/29(四)", title: "返回台灣",
-  tags: ["AIRPORT", "RETURN"],
-  stay: "溫暖的家",
-  segments: [
-    { 
-      label: "Morning", 
-      title: "前往機場", 
-      photo: "assets/images/day6_P1.jpg", 
-      items: [
-        "09:00 搭乘接駁車前往熊本機場",
-        "11:45 班機起飛"
-      ] 
-    }
-  ]
-}
-
+        },
+        {
+          day: "04", date: "10/27(二)", title: "阿蘇奇景與進擊的巨人",
+          tags: ["ASO", "VOLCANO", "NATURE"],
+          stay: "住宿：阿蘇溫泉飯店",
+          segments: [
+            { label: "Morning", title: "大分日田巡禮", photo: "assets/images/day4_P1.jpg", items: ["進擊的巨人雕像", "阿蘇沿途風景欣賞"] },
+            { label: "Afternoon", title: "阿蘇火山壯闊景致", photo: "assets/images/day4_P2.jpg", items: ["阿蘇中岳火山口", "草千里之濱金黃草原"] },
+            { label: "Evening", title: "秘境神社", photo: "assets/images/day4_P3.jpg", items: ["上色見熊野座神社", "入住溫泉飯店享用晚餐"] }
+          ]
+        },
+        {
+          day: "05", date: "10/28(三)", title: "高千穗峽與熊本市區",
+          tags: ["TAKACHIHO", "WATERFALL", "KUMAMOTO"],
+          stay: "住宿：熊本市區飯店",
+          segments: [
+            { label: "Morning", title: "高千穗峽谷", photo: "assets/images/day5_P1.jpg", items: ["真名井瀑布划船體驗", "峽谷步道散策"] },
+            { label: "Afternoon", title: "親子與文化", photo: "assets/images/day5_P2.jpg", items: ["阿蘇農場樂園"] },
+            { label: "Evening", title: "熊本市區漫遊", photo: "assets/images/day5_P3.jpg", items: ["熊本城參觀","熊本熊廣場拍照", "市區晚餐"] }
+          ]
+        },
+        {
+          day: "06", date: "10/29(四)", title: "返回台灣溫暖的家",
+          tags: ["AIRPORT", "RETURN"],
+          stay: "溫暖的家",
+          segments: [
+            { label: "Morning", title: "前往機場", photo: "assets/images/day6_P1.jpg", items: ["早餐後整理行李", "09:00 搭車前往熊本機場", "11:45 班機起飛"] }
+          ]
+        }
       ]
     };
 
-    function renderItinerary() {
-      const container = document.getElementById('dayList');
-      container.innerHTML = ITINERARY.days.map(day => `
-        <section class="day-section">
+    function initPage() {
+      // 1. 設置標題
+      document.getElementById('brandTitle').textContent = ITINERARY.tripTitle;
+      document.getElementById('heroTitle').textContent = ITINERARY.heroTitle;
+      document.getElementById('heroDates').textContent = ITINERARY.dateRange;
+      document.getElementById('heroBg').style.backgroundImage = `url(${ITINERARY.heroImage})`;
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      // 2. 生成 Hero 按鈕
+      const heroNav = document.getElementById('heroNav');
+      heroNav.innerHTML = ITINERARY.days.map(day => `
+        <a href="#day-${day.day}" class="day-btn">D${parseInt(day.day)}</a>
+      `).join('');
+
+      // 3. 生成總覽
+      const overviewContainer = document.getElementById('overviewGrid');
+      overviewContainer.innerHTML = ITINERARY.days.map(day => {
+        const allItems = day.segments.flatMap(s => s.items);
+        return `
+          <a href="#day-${day.day}" class="overview-link">
+            <div class="overview-item">
+              <div class="overview-num">${parseInt(day.day)}</div>
+              <div class="overview-content">
+                <div class="overview-title">${day.date} ${day.title}</div>
+                <div style="font-size: 13px; opacity: 0.8;">${allItems.join(' → ')}</div>
+              </div>
+            </div>
+          </a>
+        `;
+      }).join('');
+
+      // 4. 生成詳情
+      const listContainer = document.getElementById('dayList');
+      listContainer.innerHTML = ITINERARY.days.map(day => `
+        <section class="day-section" id="day-${day.day}">
           <div class="day-grid">
             <div class="day-info">
               <div class="day-number">${day.day}</div>
               <h2 class="day-title">${day.title}</h2>
               <div class="day-tags">${day.tags.map(t => `<span>#${t}</span>`).join('')}</div>
               <p style="color: var(--secondary)">日期：${day.date}</p>
-              <div class="stay-box">
-                <strong>STAY</strong><br>${day.stay}
-              </div>
+              <div class="stay-box"><strong>STAY</strong><br>${day.stay}</div>
             </div>
             <div class="timeline">
               ${day.segments.map(seg => `
@@ -308,9 +298,7 @@
                   <img src="${seg.photo}" class="seg-img" loading="lazy">
                   <div class="seg-label">${seg.label}</div>
                   <h3 class="seg-title">${seg.title}</h3>
-                  <ul class="seg-list">
-                    ${seg.items.map(item => `<li>${item}</li>`).join('')}
-                  </ul>
+                  <ul class="seg-list">${seg.items.map(item => `<li>${item}</li>`).join('')}</ul>
                 </div>
               `).join('')}
             </div>
@@ -319,35 +307,13 @@
       `).join('');
     }
 
-    // Initialize
-    document.getElementById('brandTitle').textContent = ITINERARY.tripTitle;
-    document.getElementById('heroTitle').textContent = ITINERARY.heroTitle;
-    document.getElementById('heroDates').textContent = ITINERARY.dateRange;
-    document.getElementById('heroBg').style.backgroundImage = `url(${ITINERARY.heroImage})`;
-    document.getElementById('year').textContent = new Date().getFullYear();
-    renderItinerary();
-
-    // Scroll effect for topbar
     window.addEventListener('scroll', () => {
       const topbar = document.querySelector('.topbar');
-      if (window.scrollY > 50) {
-        topbar.style.padding = "10px 0";
-        topbar.style.background = "rgba(255, 255, 255, 1)";
-      } else {
-        topbar.style.padding = "20px 0";
-        topbar.style.background = "rgba(255, 255, 255, 0.9)";
-      }
+      topbar.style.padding = window.scrollY > 50 ? "10px 0" : "20px 0";
+      topbar.style.background = window.scrollY > 50 ? "rgba(255,255,255,1)" : "rgba(255,255,255,0.9)";
     });
 
-    // Download Logic
-    document.getElementById("btnDownload").addEventListener("click", ()=>{
-      const blob = new Blob([JSON.stringify(ITINERARY, null, 2)], {type:"application/json"});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `itinerary.json`;
-      a.click();
-    });
+    initPage();
   </script>
 </body>
 </html>
